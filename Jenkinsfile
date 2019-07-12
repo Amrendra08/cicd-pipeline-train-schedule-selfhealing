@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "amrendradocker08/train-schedule"
     }
     stages {
-        stage('Build') {
+        stage('example-solution') {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             when {
-                branch 'master'
+                branch 'example-solution'
             }
             steps {
                 script {
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             when {
-                branch 'master'
+                branch 'example-solution'
             }
             steps {
                 script {
@@ -40,7 +40,7 @@ pipeline {
         }
         stage('DeployToProduction') {
             when {
-                branch 'master'
+                branch 'example-solution'
             }
             steps {
                 input 'Deploy to Production?'
